@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'config/app_router.dart';
+import 'config/routes.dart';
 import 'core/di/bloc_scope.dart';
 import 'core/resources/app_colors.dart';
 
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
             final currentPath = _router.current.router.currentPath;
             if ((currentPath != '/') &&
                 (data?.contains(ConnectivityResult.none) ?? false)) {
-              // _router.pushNamed(Routes.errorConnection);
+              _router.pushNamed(Routes.connectionLost);
             }
             return child ??
                 Container(
