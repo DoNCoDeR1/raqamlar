@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:raqamlar/core/widgets/w_bottom_button.dart';
+import 'package:raqamlar/features/draw/presentation/widgets/w_draw_body.dart';
 
 import '/core/widgets/custom_appbar.dart';
 import '/core/widgets/custom_back_button.dart';
@@ -24,7 +26,11 @@ class DrawPage extends StatelessWidget {
         title: '1',
         onBackPressed: () {},
       ),
-      body: const Placeholder(),
+      body: const WDrawBody(),
+      bottomNavigationBar: WBottomButton(
+        title: 'Baholash',
+        onPressed: () {},
+      ),
     );
   }
 }

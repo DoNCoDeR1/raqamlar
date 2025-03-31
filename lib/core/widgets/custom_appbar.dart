@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:raqamlar/core/resources/app_colors.dart';
+import 'package:raqamlar/core/resources/custom_styles.dart';
 
 import 'custom_back_button.dart';
 
@@ -43,24 +45,35 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
       color: backgroundColor,
       elevation: elevation ?? 0,
       shadowColor: shadowColor,
-      child: AppBar(
-        shape: shape,
-        automaticallyImplyLeading: !disableBackButton,
-        leading: disableBackButton
-            ? null
-            : CustomBackButton(
-                onPressed: onBackPressed ?? () => context.router.popForced(),
-                color: backButtonColor),
-        forceMaterialTransparency: forceMaterialTransparency,
-        centerTitle: true,
-        backgroundColor: backgroundColor,
-        title: titleWidget ??
-            Text(
-              title ?? '',
-              style: titleStyle,
+      child: Container(
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          border: const Border(
+            bottom: BorderSide(
+              color: AppColors.borderColor,
+              width: 1,
             ),
-        actions: actions,
-        bottom: bottom,
+          ),
+        ),
+        child: AppBar(
+          shape: shape,
+          automaticallyImplyLeading: !disableBackButton,
+          leading: disableBackButton
+              ? null
+              : CustomBackButton(
+                  onPressed: onBackPressed ?? () => context.router.popForced(),
+                  color: backButtonColor),
+          forceMaterialTransparency: forceMaterialTransparency,
+          centerTitle: true,
+          backgroundColor: backgroundColor,
+          title: titleWidget ??
+              Text(
+                title ?? '',
+                style: titleStyle ?? CustomStyle.cStyleBlack32WBold,
+              ),
+          actions: actions,
+          bottom: bottom,
+        ),
       ),
     );
   }

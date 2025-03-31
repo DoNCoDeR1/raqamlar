@@ -5,20 +5,6 @@ import '../resources/app_colors.dart';
 import '../resources/dimensions.dart';
 
 class CustomElevatedButton extends StatelessWidget {
-  const CustomElevatedButton({
-    required this.title,
-    required this.titleStyle,
-    this.icon,
-    this.onPressed,
-    this.background,
-    this.isLoading = false,
-    this.isEnabled = true,
-    this.margin = EdgeInsetsDirectional.zero,
-    this.height = 48,
-    this.borderRadius = 12,
-    super.key,
-  });
-
   final GestureTapCallback? onPressed;
   final Color? background;
   final bool isLoading;
@@ -29,6 +15,20 @@ class CustomElevatedButton extends StatelessWidget {
   final TextStyle? titleStyle;
   final double height;
   final double borderRadius;
+
+  const CustomElevatedButton({
+    required this.title,
+    this.titleStyle,
+    this.icon,
+    this.onPressed,
+    this.background,
+    this.isLoading = false,
+    this.isEnabled = true,
+    this.margin = EdgeInsetsDirectional.zero,
+    this.height = 48,
+    this.borderRadius = 12,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class CustomElevatedButton extends StatelessWidget {
                       ),
                     Text(
                       title,
-                      style: titleStyle,
+                      style: titleStyle ?? const TextStyle(color: Colors.white),
                     ),
                   ],
                 ),
