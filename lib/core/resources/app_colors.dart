@@ -7,4 +7,5 @@ class AppColors {
   static const Color backgroundColor = Color(0xFFEDEEED);
   static const Color romanSilver = Color(0xFF808D9E);
   static const Color isabella = Color(0xFFF4F2F2);
+  static const Color darkGrey = Color(0xFFD9D9D9);
 }

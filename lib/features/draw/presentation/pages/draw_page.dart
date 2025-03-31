@@ -16,7 +16,7 @@ class DrawPage extends StatelessWidget {
       appBar: CustomAppbar(
         actions: [
           Transform.rotate(
-            angle: 180 * 3.14 / 180,
+            angle: 3.14,
             child: CustomBackButton(onPressed: () {}),
           )
         ],
