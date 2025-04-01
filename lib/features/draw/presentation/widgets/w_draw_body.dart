@@ -55,7 +55,7 @@ class _WDrawBodyState extends State<WDrawBody> {
             decoration: BoxDecoration(
               border: Border.all(color: AppColors.borderColor),
               borderRadius:
-                  const BorderRadius.only(topRight: Radius.circular(42)),
+              const BorderRadius.only(topRight: Radius.circular(42)),
               color: Colors.white,
             ),
             height: double.infinity,
@@ -108,7 +108,7 @@ class _WDrawBodyState extends State<WDrawBody> {
                 decoration: BoxDecoration(
                   border: Border.all(color: AppColors.borderColor),
                   borderRadius:
-                      const BorderRadius.only(topRight: Radius.circular(42)),
+                  const BorderRadius.only(topRight: Radius.circular(42),),
                   color: AppColors.darkGrey,
                 ),
                 child: Assets.png.clear.image(width: 24),
