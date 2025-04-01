@@ -44,10 +44,7 @@ class MyApp extends StatelessWidget {
                 (data?.contains(ConnectivityResult.none) ?? false)) {
               _router.pushNamed(Routes.connectionLost);
             }
-            return child ??
-                Container(
-                  color: Colors.redAccent,
-                );
+            return child ?? Container(color: Colors.redAccent);
           },
         );
       },
