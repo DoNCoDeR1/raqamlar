@@ -18,17 +18,42 @@ class $AssetsPngGen {
   /// File path: assets/png/clear.png
   AssetGenImage get clear => const AssetGenImage('assets/png/clear.png');
 
+  /// File path: assets/png/eight.png
+  AssetGenImage get eight => const AssetGenImage('assets/png/eight.png');
+
+  /// File path: assets/png/five.png
+  AssetGenImage get five => const AssetGenImage('assets/png/five.png');
+
+  /// File path: assets/png/four.png
+  AssetGenImage get four => const AssetGenImage('assets/png/four.png');
+
   /// File path: assets/png/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/png/logo.png');
+
+  /// File path: assets/png/nine.png
+  AssetGenImage get nine => const AssetGenImage('assets/png/nine.png');
 
   /// File path: assets/png/one.png
   AssetGenImage get one => const AssetGenImage('assets/png/one.png');
 
+  /// File path: assets/png/seven.png
+  AssetGenImage get seven => const AssetGenImage('assets/png/seven.png');
+
+  /// File path: assets/png/six.png
+  AssetGenImage get six => const AssetGenImage('assets/png/six.png');
+
+  /// File path: assets/png/three.png
+  AssetGenImage get three => const AssetGenImage('assets/png/three.png');
+
   /// File path: assets/png/two.png
   AssetGenImage get two => const AssetGenImage('assets/png/two.png');
 
+  /// File path: assets/png/zero.png
+  AssetGenImage get zero => const AssetGenImage('assets/png/zero.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [clear, logo, one, two];
+  List<AssetGenImage> get values =>
+      [clear, eight, five, four, logo, nine, one, seven, six, three, two, zero];
 }
 
 class $AssetsSvgGen {
