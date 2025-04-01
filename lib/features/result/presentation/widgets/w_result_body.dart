@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:raqamlar/core/resources/dimensions.dart';
 
+final List<Color> colorsOfPros = [
+  const Color(0xFF23B59C), //alo
+  const Color(0xFF4823B5), //yaxshi
+  const Color(0xFFB52325) //yomon
+];
+
 class WResultBody extends StatelessWidget {
-  const WResultBody({super.key});
+  final int? foiz;
+
+  const WResultBody({
+    super.key,
+    this.foiz,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,21 +33,25 @@ class WResultBody extends StatelessWidget {
           height: 76,
           padding: Dimensions.paddingLeft16,
           color: Colors.white,
-          child: const Align(
+          child: Align(
             alignment: Alignment.centerLeft,
             child: Text.rich(
               TextSpan(
                 children: [
                   TextSpan(
-                    text: "86%",
+                    text: "$foiz%",
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       fontFamily: "Urbanist",
-                      color: Color(0xFF23B59C),
+                      color: foiz! < 50
+                          ? colorsOfPros[3]
+                          : foiz! < 75
+                              ? colorsOfPros[1]
+                              : colorsOfPros[0],
                     ),
                   ),
-                  TextSpan(
+                  const TextSpan(
                     text: " aniq yozdingiz",
                     style: TextStyle(
                       fontSize: 24,
