@@ -13,7 +13,8 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   data_connection_checker_tv: ^0.3.5-nullsafety
-
+  tflite_flutter: ^0.11.0
+  image: ^4.0.17
   #Translations
   sprintf: ^7.0.0
 
@@ -47,6 +48,7 @@ dependencies:
   #retrofit: ^4.0.1
   json_serializable: ^6.7.1
   json_annotation: ^4.8.1
+  dart_openai: ^5.1.0
 
   #DB
   shared_preferences: ^2.2.0

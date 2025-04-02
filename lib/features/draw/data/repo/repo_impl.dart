@@ -1,0 +1,56 @@
+import 'dart:convert';
+
+import 'package:dart_openai/dart_openai.dart';
+import 'package:dartz/dartz.dart';
+
+import '../../../../core/errors/failure.dart';
+import '../../domain/entity/drawing_param.dart';
+import '../../domain/repository/draw_repo.dart';
+
+class DrawRepoImpl extends DrawRepo {
+  DrawRepoImpl() {
+    OpenAI.apiKey =
+        "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";
+  }
+
+  @override
+  Future<Either<Failure, String>> submit(DrawingParams params) async {
+    try {
+      // Read image and encode as base64
+      final imageBytes = await params.image.readAsBytes();
+      final base64Image = base64Encode(imageBytes);
+
+      // Send the image using OpenAI's vision-supported model
+      final response = await OpenAI.instance.chat.create(
+        model: 'gpt-4o', // Ensure a vision-supported model
+        messages: [
+          OpenAIChatCompletionChoiceMessageModel(
+            role: OpenAIChatMessageRole.system,
+            content: [
+              OpenAIChatCompletionChoiceMessageContentItemModel.text(
+                  'You are an AI that analyzes children’s drawings. Given an image and a number, compare the drawn number to the expected number and return a similarity percentage (0-100) in three words. write '),
+            ],
+          ),
+          OpenAIChatCompletionChoiceMessageModel(
+            role: OpenAIChatMessageRole.user,
+            content: [
+              OpenAIChatCompletionChoiceMessageContentItemModel.text(
+                  "Here is a drawing. The expected number is: ${params.number}. Analyze it and provide a similarity percentage (0-100)."),
+              OpenAIChatCompletionChoiceMessageContentItemModel.text(
+                'data:image/png;base64,$base64Image',
+              ),
+            ],
+          ),
+        ],
+        temperature: 0.7,
+        maxTokens: 20,
+      );
+
+      // Extract response
+      final responseText = response.choices.first.message.content;
+      return Right(response.choices.toString());
+    } catch (e) {
+      return Left(ServerFailure(errorMessage: e.toString()));
+    }
+  }
+}

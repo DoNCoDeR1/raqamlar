@@ -5,10 +5,12 @@ import 'package:flutter/services.dart';
 import 'config/app_router.dart';
 import 'config/routes.dart';
 import 'core/di/bloc_scope.dart';
+import 'core/di/di_container.dart';
 import 'core/resources/app_colors.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await setupDI();
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
