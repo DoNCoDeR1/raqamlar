@@ -9,5 +9,6 @@ class DrawState with _$DrawState {
     String? percent,
     @Default([]) List<Offset?> points,
     GlobalKey? globalKey,
+    File? imageFile,
   }) = _DrawState;
 }

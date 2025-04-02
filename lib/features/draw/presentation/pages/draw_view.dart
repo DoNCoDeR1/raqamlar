@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -5,6 +6,7 @@ import '/core/widgets/custom_appbar.dart';
 import '/core/widgets/custom_back_button.dart';
 import '/core/widgets/w_bottom_button.dart';
 import '/features/draw/presentation/widgets/w_draw_body.dart';
+import '../../../../config/app_router.gr.dart';
 import '../bloc/draw_bloc.dart';
 
 class DrawView extends StatelessWidget {
@@ -21,6 +23,16 @@ class DrawView extends StatelessWidget {
         // if (state.status.isFailed) {
         //   showToast("Xatolik yuz berdi!");
         // }
+
+        if (state.status.isLoaded) {
+          context.router.replace(
+            ResultRoute(
+              percentage: state.percent,
+              numberEntity: state.number,
+              image: state.imageFile,
+            ),
+          );
+        }
       },
       builder: (context, state) {
         final number = state.number;

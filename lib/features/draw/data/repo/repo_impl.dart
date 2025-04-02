@@ -28,7 +28,7 @@ class DrawRepoImpl extends DrawRepo {
             role: OpenAIChatMessageRole.system,
             content: [
               OpenAIChatCompletionChoiceMessageContentItemModel.text(
-                  'You are an AI that analyzes children’s drawings. Given an image and a number, compare the drawn number to the expected number and return a similarity percentage (0-100) in three words. write '),
+                  'You are an AI that analyzes children’s drawings. Given an image and a number, compare the drawn number to the expected number and return only the similarity percentage (0-100) in numeric form.'),
             ],
           ),
           OpenAIChatCompletionChoiceMessageModel(
@@ -43,12 +43,11 @@ class DrawRepoImpl extends DrawRepo {
           ),
         ],
         temperature: 0.7,
-        maxTokens: 20,
+        maxTokens: 5, // Adjusted to limit the response length
       );
-
-      // Extract response
-      final responseText = response.choices.first.message.content;
-      return Right(response.choices.toString());
+      final responseText =
+          (response.choices.first.message.content?.first.text ?? '').trim();
+      return Right(responseText);
     } catch (e) {
       return Left(ServerFailure(errorMessage: e.toString()));
     }

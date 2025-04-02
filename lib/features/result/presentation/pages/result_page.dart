@@ -1,13 +1,27 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:raqamlar/core/widgets/custom_appbar.dart';
-import 'package:raqamlar/core/widgets/w_bottom_button.dart';
+import 'package:raqamlar/core/resources/app_colors.dart';
 
+import '/core/widgets/custom_appbar.dart';
+import '/core/widgets/w_bottom_button.dart';
+import '/features/draw/domain/entity/number_entity.dart';
+import '../../../../config/app_router.gr.dart';
 import '../widgets/w_result_body.dart';
 
 @RoutePage()
 class ResultPage extends StatelessWidget {
-  const ResultPage({super.key});
+  final String? percentage;
+  final NumberEntity? numberEntity;
+  final File? image;
+
+  const ResultPage({
+    super.key,
+    this.percentage,
+    this.numberEntity,
+    this.image,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +32,8 @@ class ResultPage extends StatelessWidget {
             angle: 3.14,
           )
         ],
-        titleStyle: const TextStyle(
-          color: Color(0xFF1D1E25),
-          fontFamily: "Urbanist",
+        titleStyle:  const TextStyle(
+          color: AppColors.black,
           fontSize: 40,
           fontWeight: FontWeight.bold,
         ),
@@ -30,7 +43,9 @@ class ResultPage extends StatelessWidget {
       body: const WResultBody(),
       bottomNavigationBar: WBottomButton(
         title: "Yana",
-        onPressed: () {},
+        onPressed: () {
+          context.router.replace(const DrawRoute());
+        },
       ),
     );
   }
