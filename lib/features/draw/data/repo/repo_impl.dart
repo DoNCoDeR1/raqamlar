@@ -7,7 +7,7 @@ import '../../../../core/errors/failure.dart';
 import '../../domain/entity/drawing_param.dart';
 import '../../domain/repository/draw_repo.dart';
 
-class DrawRepoImpl extends DrawRepo {
+/*class DrawRepoImpl extends DrawRepo {
   DrawRepoImpl() {
     OpenAI.apiKey =
         "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";
@@ -53,3 +53,4 @@ class DrawRepoImpl extends DrawRepo {
     }
   }
 }
+*/
