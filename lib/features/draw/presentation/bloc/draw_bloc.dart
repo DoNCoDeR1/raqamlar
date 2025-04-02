@@ -31,6 +31,7 @@ class DrawBloc extends Bloc<DrawEvent, DrawState> {
   }
 
   final numbersData = numbers;
+  int i = 0;
 
   void _init(DrawEvent event, Emitter<DrawState> emit) {
     emit(state.copyWith(number: numbersData.first));
@@ -60,6 +61,7 @@ class DrawBloc extends Bloc<DrawEvent, DrawState> {
   }
 
   Future<void> _submit(DrawEvent event, Emitter<DrawState> emit) async {
+    i ++;
     emit(state.copyWith(status: Status.loading));
     RenderRepaintBoundary boundary = state.globalKey?.currentContext!
         .findRenderObject() as RenderRepaintBoundary;
@@ -67,7 +69,8 @@ class DrawBloc extends Bloc<DrawEvent, DrawState> {
     ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     Uint8List pngBytes = byteData!.buffer.asUint8List();
     final directory = await getApplicationDocumentsDirectory();
-    final filePath = '${directory.path}/drawing.png';
+    final timestamp = DateTime.now().millisecondsSinceEpoch;
+    final filePath = '${directory.path}/drawing_$timestamp.png';
     final file = File(filePath);
     await file.writeAsBytes(pngBytes);
     final response = await drawRepo.submit(DrawingParams(

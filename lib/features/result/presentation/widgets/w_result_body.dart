@@ -79,7 +79,6 @@ class WResultBody extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      fontFamily: "Urbanist",
                       color: foiz! < 50
                           ? colorsOfPros[2]
                           : foiz! < 75
@@ -92,7 +91,6 @@ class WResultBody extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      fontFamily: "Urbanist",
                     ),
                   ),
                 ],

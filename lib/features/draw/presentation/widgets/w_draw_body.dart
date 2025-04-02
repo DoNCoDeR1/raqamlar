@@ -99,7 +99,7 @@ class _DrawingPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
       ..color = color
-      ..strokeWidth = 10.0
+      ..strokeWidth = 20.0
       ..strokeCap = StrokeCap.round;
 
     canvas.clipRect(Rect.fromLTWH(0, 0, size.width, size.height));
