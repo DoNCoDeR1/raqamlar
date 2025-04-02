@@ -8,4 +8,6 @@ class AppColors {
   static const Color romanSilver = Color(0xFF808D9E);
   static const Color isabella = Color(0xFFF4F2F2);
   static const Color darkGrey = Color(0xFFD9D9D9);
+  static const Color softGreyF8 = Color(0xFFF8F8FB);
+  static const Color inputGrey = Color(0xFFE0E0E0);
 }

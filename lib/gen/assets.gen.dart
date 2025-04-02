@@ -65,8 +65,14 @@ class $AssetsSvgGen {
   /// File path: assets/svg/connection.svg
   SvgGenImage get connection => const SvgGenImage('assets/svg/connection.svg');
 
+  /// File path: assets/svg/minus.svg
+  SvgGenImage get minus => const SvgGenImage('assets/svg/minus.svg');
+
+  /// File path: assets/svg/plus.svg
+  SvgGenImage get plus => const SvgGenImage('assets/svg/plus.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [arrowLeft, connection];
+  List<SvgGenImage> get values => [arrowLeft, connection, minus, plus];
 }
 
 class Assets {

@@ -10,7 +10,7 @@ import '../../domain/repository/draw_repo.dart';
 class DrawRepoImpl extends DrawRepo {
   DrawRepoImpl() {
     OpenAI.apiKey =
-        "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";
+        "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";
   }
 
   @override

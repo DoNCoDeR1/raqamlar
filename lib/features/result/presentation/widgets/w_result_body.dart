@@ -1,5 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:raqamlar/core/resources/app_colors.dart';
 import 'package:raqamlar/core/resources/dimensions.dart';
+import 'package:raqamlar/features/draw/domain/entity/number_entity.dart';
+import 'package:raqamlar/features/result/presentation/widgets/w_motivation.dart';
 
 final List<Color> colorsOfPros = [
   const Color(0xFF23B59C), //alo
@@ -9,15 +14,19 @@ final List<Color> colorsOfPros = [
 
 class WResultBody extends StatelessWidget {
   final int? foiz;
+  final NumberEntity? entity;
+  final File? file;
 
   const WResultBody({
     super.key,
     this.foiz,
+    this.entity,
+    this.file,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
         Container(
           width: double.maxFinite,
@@ -27,6 +36,33 @@ class WResultBody extends StatelessWidget {
             bottom: 2,
           ),
           color: Colors.white,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              entity?.image ?? const SizedBox(height: 109, width: 68),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    child: file != null
+                        ? Image.file(file!, width: 68, height: 130)
+                        : null,
+                  ),
+
+                  Text(
+                    "Sizniki",
+                    style: TextStyle(
+                      color: AppColors.black.withOpacity(0.35),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
         Container(
           width: double.maxFinite,
@@ -45,7 +81,7 @@ class WResultBody extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       fontFamily: "Urbanist",
                       color: foiz! < 50
-                          ? colorsOfPros[3]
+                          ? colorsOfPros[2]
                           : foiz! < 75
                               ? colorsOfPros[1]
                               : colorsOfPros[0],
@@ -63,7 +99,11 @@ class WResultBody extends StatelessWidget {
               ),
             ),
           ),
-        )
+        ),
+        const Padding(
+          padding: Dimensions.paddingAll16,
+          child: WMotivation(title: "sth", subtitle: "sth"),
+        ),
       ],
     );
   }

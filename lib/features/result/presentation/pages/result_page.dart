@@ -32,7 +32,7 @@ class ResultPage extends StatelessWidget {
             angle: 3.14,
           )
         ],
-        titleStyle:  const TextStyle(
+        titleStyle: const TextStyle(
           color: AppColors.black,
           fontSize: 40,
           fontWeight: FontWeight.bold,
@@ -40,7 +40,11 @@ class ResultPage extends StatelessWidget {
         title: "Natija",
         disableBackButton: true,
       ),
-      body: const WResultBody(),
+      body: WResultBody(
+        foiz: int.tryParse(percentage ?? "0") ?? 0,
+        entity: numberEntity,
+        file: image,
+      ),
       bottomNavigationBar: WBottomButton(
         title: "Yana",
         onPressed: () {
