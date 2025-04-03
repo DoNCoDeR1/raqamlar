@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:raqamlar/core/resources/app_colors.dart';
+import 'package:raqamlar/core/widgets/motivation_model.dart';
 
 import '../../../../core/resources/custom_styles.dart';
 import '../../../../gen/assets.gen.dart';
 
 class WMotivation extends StatefulWidget {
-  final String title;
-  final String subtitle;
+  final MotivationModel motivation;
 
   const WMotivation({
-    required this.title,
-    required this.subtitle,
     super.key,
+    required this.motivation,
   });
 
   @override
   State<WMotivation> createState() => _WMotivationState();
 }
 
-class _WMotivationState extends State<WMotivation> with TickerProviderStateMixin {
+class _WMotivationState extends State<WMotivation>
+    with TickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _animation;
   late final Tween<double> _sizeTween;
@@ -75,12 +75,15 @@ class _WMotivationState extends State<WMotivation> with TickerProviderStateMixin
                     children: [
                       Expanded(
                         child: Text(
-                          widget.title,
+                          widget.motivation.title,
                           overflow: TextOverflow.visible,
                           style: CustomStyle.black14w700,
                         ),
                       ),
-                      if (_isExpanded) Assets.svg.minus.svg() else Assets.svg.plus.svg()
+                      if (_isExpanded)
+                        Assets.svg.minus.svg()
+                      else
+                        Assets.svg.plus.svg()
                     ],
                   ),
                   SizeTransition(
@@ -94,11 +97,10 @@ class _WMotivationState extends State<WMotivation> with TickerProviderStateMixin
                           child: Divider(height: 1, color: AppColors.inputGrey),
                         ),
                         Text(
-                          widget.subtitle,
+                          widget.motivation.subtitle,
                           style: CustomStyle.black14w400,
                           textAlign: TextAlign.start,
                         ),
-
                       ],
                     ),
                   ),

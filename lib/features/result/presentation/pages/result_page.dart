@@ -44,6 +44,7 @@ class ResultPage extends StatelessWidget {
         foiz: int.tryParse(percentage ?? "0") ?? 0,
         entity: numberEntity,
         file: image,
+        ctxt: context,
       ),
       bottomNavigationBar: WBottomButton(
         title: "Yana",

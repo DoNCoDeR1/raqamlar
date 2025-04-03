@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:raqamlar/core/resources/app_colors.dart';
 import 'package:raqamlar/core/resources/dimensions.dart';
+import 'package:raqamlar/core/resources/motivation_list.dart';
 import 'package:raqamlar/features/draw/domain/entity/number_entity.dart';
 import 'package:raqamlar/features/result/presentation/widgets/w_motivation.dart';
 
@@ -16,16 +18,19 @@ class WResultBody extends StatelessWidget {
   final int? foiz;
   final NumberEntity? entity;
   final File? file;
+  final BuildContext? ctxt;
 
   const WResultBody({
     super.key,
     this.foiz,
     this.entity,
     this.file,
+    this.ctxt,
   });
 
   @override
   Widget build(BuildContext context) {
+    Random random = Random();
     return ListView(
       children: [
         Container(
@@ -50,7 +55,6 @@ class WResultBody extends StatelessWidget {
                         ? Image.file(file!, width: 68, height: 130)
                         : null,
                   ),
-
                   Text(
                     "Sizniki",
                     style: TextStyle(
@@ -98,9 +102,11 @@ class WResultBody extends StatelessWidget {
             ),
           ),
         ),
-        const Padding(
+        Padding(
           padding: Dimensions.paddingAll16,
-          child: WMotivation(title: "sth", subtitle: "sth"),
+          child: WMotivation(
+            motivation: listOfMotivation[random.nextInt(10)],
+          ),
         ),
       ],
     );
