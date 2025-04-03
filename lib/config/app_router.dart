@@ -20,11 +20,5 @@ class AppRouter extends $AppRouter {
           transitionsBuilder: TransitionsBuilders.fadeIn,
           durationInMilliseconds: 300,
         ),
-        CustomRoute(
-          page: ErrorConnectionRoute.page,
-          path: Routes.connectionLost,
-          transitionsBuilder: TransitionsBuilders.fadeIn,
-          durationInMilliseconds: 300,
-        ),
       ];
 }

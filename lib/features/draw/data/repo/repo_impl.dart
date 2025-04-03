@@ -1,56 +1,71 @@
 import 'dart:convert';
 
-import 'package:dart_openai/dart_openai.dart';
 import 'package:dartz/dartz.dart';
+import 'package:http/http.dart' as http;
 
-import '../../../../core/errors/failure.dart';
+import '/core/errors/failure.dart';
 import '../../domain/entity/drawing_param.dart';
 import '../../domain/repository/draw_repo.dart';
 
-/*class DrawRepoImpl extends DrawRepo {
-  DrawRepoImpl() {
-    OpenAI.apiKey =
-        "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";
-  }
+class DrawRepoImpl extends DrawRepo {
+  DrawRepoImpl();
 
   @override
   Future<Either<Failure, String>> submit(DrawingParams params) async {
     try {
-      // Read image and encode as base64
       final imageBytes = await params.image.readAsBytes();
       final base64Image = base64Encode(imageBytes);
 
-      // Send the image using OpenAI's vision-supported model
-      final response = await OpenAI.instance.chat.create(
-        model: 'gpt-4o', // Ensure a vision-supported model
-        messages: [
-          OpenAIChatCompletionChoiceMessageModel(
-            role: OpenAIChatMessageRole.system,
-            content: [
-              OpenAIChatCompletionChoiceMessageContentItemModel.text(
-                  'You are an AI that analyzes children’s drawings. Given an image and a number, compare the drawn number to the expected number and return only the similarity percentage (0-100) in numeric form.'),
-            ],
-          ),
-          OpenAIChatCompletionChoiceMessageModel(
-            role: OpenAIChatMessageRole.user,
-            content: [
-              OpenAIChatCompletionChoiceMessageContentItemModel.text(
-                  "Here is a drawing. The expected number is: ${params.number}. Analyze it and provide a similarity percentage (0-100)."),
-              OpenAIChatCompletionChoiceMessageContentItemModel.text(
-                'data:image/png;base64,$base64Image',
-              ),
-            ],
-          ),
-        ],
-        temperature: 0.7,
-        maxTokens: 5, // Adjusted to limit the response length
+      final response = await http.post(
+        Uri.parse('https://api.openai.com/v1/chat/completions'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization':
+              'Bearer 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',
+        },
+        body: json.encode({
+          'model': 'gpt-4o',
+          'messages': [
+            {
+              'role': 'system',
+              'content':
+                  'You are a helpful assistant that identifies numbers in image and you should compare it with actual number, only return the number(percentage), no other words allowed only percentage!'
+            },
+            {
+              'role': 'user',
+              "content": [
+                {
+                  "type": "text",
+                  "text":
+                      "What is the number in the image? how much it is like an actual number(${params.number})?, percents should be from 0 to 100"
+                },
+                {
+                  "type": "image_url",
+                  "image_url": {"url": 'data:image/jpeg;base64,$base64Image'}
+                }
+              ]
+            }
+          ],
+          'max_tokens': 100
+        }),
       );
-      final responseText =
-          (response.choices.first.message.content?.first.text ?? '').trim();
-      return Right(responseText);
+
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body);
+        final String? numberString =
+            responseData['choices']?[0]['message']?['content'];
+
+        if (numberString != null && numberString.isNotEmpty) {
+          return Right(numberString.trim());
+        } else {
+          return Left(ServerFailure(errorMessage: "Invalid response format"));
+        }
+      } else {
+        return Left(
+            ServerFailure(errorMessage: "API error: ${response.statusCode}"));
+      }
     } catch (e) {
       return Left(ServerFailure(errorMessage: e.toString()));
     }
   }
 }
-*/

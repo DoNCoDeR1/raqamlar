@@ -1,9 +1,7 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'config/app_router.dart';
-import 'config/routes.dart';
 import 'core/di/bloc_scope.dart';
 import 'core/di/di_container.dart';
 import 'core/resources/app_colors.dart';
@@ -36,20 +34,6 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
       routerConfig: _router.config(),
-      builder: (context, child) {
-        return StreamBuilder<List<ConnectivityResult>>(
-          stream: Connectivity().onConnectivityChanged,
-          builder: (context, snapshot) {
-            final data = snapshot.data;
-            final currentPath = _router.current.router.currentPath;
-            if ((currentPath != '/') &&
-                (data?.contains(ConnectivityResult.none) ?? false)) {
-              _router.pushNamed(Routes.connectionLost);
-            }
-            return child ?? Container(color: Colors.redAccent);
-          },
-        );
-      },
     );
   }
 }
