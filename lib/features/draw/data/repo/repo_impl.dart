@@ -21,7 +21,7 @@ class DrawRepoImpl extends DrawRepo {
         headers: {
           'Content-Type': 'application/json',
           'Authorization':
-          'Bearer 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',
+          //'Bearer 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',
         },
         body: json.encode({
           'model': 'gpt-4o',
